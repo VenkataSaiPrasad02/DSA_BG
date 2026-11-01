@@ -1,0 +1,47 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Create dashboard layout component structure with separate Header, Navbar, Aside, and DashboardLayout components per requirements. Current Dashboard.jsx is a simple welcome page. Requirements specify: Header with app name and logout, Navbar for main navigation, Aside for dashboard-specific sidebar, DashboardLayout wrapper composing all three, no Footer. All styling must be in separate CSS files.",
+  "status": "pending",
+  "steps": [
+    "Create src/components/layout/ directory to house all layout components.",
+    "Create src/components/layout/Header.jsx: Display 'DSA Battlegrounds' title on left, show authenticated user email on right (from useAuth hook), add Logout button that calls logout() and navigates to /login. Use semantic HTML header tag.",
+    "Create src/styles/Header.css: Horizontal flexbox layout, fixed or sticky positioning at top, primary brand colors, padding and spacing, hover effects on logout button, responsive design (stack on mobile if needed).",
+    "Create src/components/layout/Navbar.jsx: Main navigation with React Router Link components for Dashboard, Problems (placeholder), Leaderboard (placeholder), Profile (placeholder). Use useLocation to highlight active route. Horizontal layout on desktop.",
+    "Create src/styles/Navbar.css: Horizontal nav bar styling, active link highlighting (different background or underline), hover effects, spacing between links, responsive design.",
+    "Create src/components/layout/Aside.jsx: Sidebar for Dashboard-specific navigation with links to Overview, My Submissions, Progress, Settings (all placeholders for now). Vertical layout, fixed width.",
+    "Create src/styles/Aside.css: Vertical sidebar styling, fixed width (200-250px) on desktop, background color distinct from main content, link styling, optional collapse/expand toggle styling if implemented, responsive design (hide or collapse on mobile).",
+    "Create src/components/layout/DashboardLayout.jsx: Wrapper component that imports and renders Header, Navbar, Aside, and children (main content area). Structure: Header at top spanning full width, below that a body div containing Navbar and a main area div containing Aside on left and content on right. Children rendered in the content area.",
+    "Create src/styles/DashboardLayout.css: CSS Grid or Flexbox layout defining the overall structure. Header spans full width at top. Body section below uses flexbox or grid to position Navbar, Aside, and main content area. Proper spacing, overflow handling, responsive breakpoints.",
+    "Update src/pages/Dashboard.jsx: Import DashboardLayout. Remove redundant header/logout/user display code (now in Header component). Wrap the dashboard content (welcome message, user info) with DashboardLayout component. Keep user display for now as demo content showing userId and email.",
+    "Update src/styles/Dashboard.css: Remove header/logout styles (now in Header.css). Keep only styles for the dashboard-welcome content area.",
+    "Test the dashboard: Login -> Dashboard renders with Header showing app name and email, Navbar with navigation links, Aside with sidebar links, and welcome content in center. Logout button in Header works. All layout components display correctly on desktop and mobile viewports."
+  ],
+  "acceptance_criteria": [
+    "Header component displays 'DSA Battlegrounds' title, user email, and working Logout button",
+    "Navbar component displays navigation links (Dashboard, Problems, Leaderboard, Profile) with active link highlighting",
+    "Aside component displays sidebar navigation (Overview, My Submissions, Progress, Settings)",
+    "DashboardLayout component composes Header, Navbar, Aside, and children correctly",
+    "Dashboard page uses DashboardLayout and renders welcome content in the main area",
+    "All components have separate CSS files in src/styles/",
+    "No inline styles used",
+    "Layout is responsive on desktop, tablet, and mobile viewports",
+    "Logout button in Header clears token and redirects to /login",
+    "No footer is displayed (per requirements)"
+  ],
+  "verification": [
+    "Start frontend: npm run dev",
+    "Login to access dashboard",
+    "Verify Header displays at top with 'DSA Battlegrounds' on left and user email + Logout button on right",
+    "Verify Navbar displays below header with navigation links",
+    "Verify Aside sidebar displays on left side of main content area",
+    "Verify dashboard welcome content displays in center/right main area",
+    "Click Logout in Header -> token cleared, redirected to /login, cannot access /dashboard without re-login",
+    "Click navigation links in Navbar -> active link is highlighted (even if they go to placeholders)",
+    "Resize browser window to mobile size -> layout responds appropriately (sidebar collapses/hides, header stacks if needed)",
+    "Inspect elements in browser DevTools -> verify no inline styles, all styles come from CSS files",
+    "Check browser console for no errors or warnings"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

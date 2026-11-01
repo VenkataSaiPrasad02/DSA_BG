@@ -1,0 +1,38 @@
+{
+  "id": "FEAT-001",
+  "type": "feat",
+  "description": "Fix authentication flows to implement two-step OTP verification for both login and registration, matching the backend's actual API contract. Currently Login.jsx expects JWT immediately but backend sends OTP first. Currently Register.jsx redirects to login immediately but backend requires OTP verification first. This feature implements the correct two-step flows and adds redirect logic to prevent authenticated users from accessing login/register pages.",
+  "status": "pending",
+  "steps": [
+    "Read src/pages/Login.jsx, src/pages/Register.jsx, src/context/AuthContext.jsx, and src/api/axios.jsx to understand current implementation.",
+    "Update src/pages/Login.jsx: Add state for flow step ('credentials' | 'otp'), email storage, and OTP input. Modify handleFormSubmit to POST /auth/login and switch to OTP step on success. Add handleOtpSubmit function to POST /auth/login/verify-otp with email + OTP, extract token from response.data.token, call login(token), and redirect to /dashboard. Add conditional rendering to show OTP input form when step is 'otp'. Add Resend OTP button that re-calls POST /auth/login. Add useEffect to redirect authenticated users to /dashboard.",
+    "Update src/styles/Login.css: Add styles for OTP input form, OTP input field, verify button, resend button, and info message displaying 'We've sent a verification code to your email'.",
+    "Update src/pages/Register.jsx: Add state for flow step ('registration' | 'otp'), email storage, and OTP input. Modify handleFormSubmit to POST /auth/register and switch to OTP step on success. Add handleOtpSubmit function to POST /auth/signup/verify-otp with email + OTP, show success message, and redirect to /login after 2 seconds. Add conditional rendering to show OTP input form when step is 'otp'. Add Resend OTP button that re-calls POST /auth/register with stored formData. Add useEffect to redirect authenticated users to /dashboard.",
+    "Update src/styles/Register.css: Add styles for OTP input form matching the Login.css OTP styles for consistency.",
+    "Test the complete flows: (1) Register with new user -> receive OTP form -> enter OTP -> success message -> redirect to login. (2) Login with credentials -> receive OTP form -> enter OTP -> redirect to dashboard. (3) Try to access /login or /register while authenticated -> auto-redirect to /dashboard. (4) Test Resend OTP buttons in both flows. (5) Test invalid OTP error handling. (6) Test OAuth2 flow still works (Google login -> redirect to dashboard)."
+  ],
+  "acceptance_criteria": [
+    "Login page implements two-step flow: credentials submission sends OTP, OTP form appears, OTP verification returns JWT token and redirects to dashboard",
+    "Register page implements two-step flow: registration sends OTP, OTP form appears, OTP verification completes registration and redirects to login",
+    "Both pages show clear messaging: 'We've sent a verification code to your email' or similar",
+    "Resend OTP buttons work in both Login and Register flows",
+    "Authenticated users visiting /login or /register are automatically redirected to /dashboard",
+    "Error messages display correctly for invalid credentials, invalid OTP, and expired OTP",
+    "OAuth2 social login still works without changes",
+    "No console errors during authentication flows"
+  ],
+  "verification": [
+    "Start frontend: npm run dev",
+    "Ensure backend is running on port 8080, RabbitMQ on 5672, Redis running",
+    "Open http://localhost:5173 in browser",
+    "Test registration flow: fill form -> submit -> OTP form appears -> check email for OTP -> enter OTP -> success message -> redirects to login",
+    "Test login flow: enter credentials -> submit -> OTP form appears -> check email for OTP -> enter OTP -> redirects to dashboard",
+    "Test authenticated redirect: after login, manually navigate to /login -> should auto-redirect to /dashboard",
+    "Test resend OTP: during OTP step, click Resend OTP -> new OTP should be sent",
+    "Test error cases: enter wrong OTP -> error message displays, enter wrong credentials -> error message displays",
+    "Test OAuth2: click Google login button -> authenticate -> redirects to dashboard with token",
+    "Check browser console for no errors during all flows"
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

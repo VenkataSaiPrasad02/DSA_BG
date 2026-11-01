@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { verifySignupOtp, verifyLoginOtp, loginUser } from '../services/authService';
+import { signUpOtpVerification, loginOtpVerification, login } from '../services/authService';
 import '../styles/VerifyOtp.css';
 
 /**
@@ -100,11 +100,11 @@ const VerifyOtp = () => {
         setLoading(true);
         try {
             if (isSignup) {
-                await verifySignupOtp({ email: email.trim().toLowerCase(), otp: otp.trim() });
+                await signUpOtpVerification({ email: email.trim().toLowerCase(), otp: otp.trim() });
                 setSuccessMsg('Email verified! Redirecting to sign in…');
                 setTimeout(() => navigate('/login'), 1500);
             } else {
-                const res = await verifyLoginOtp({
+                const res = await loginOtpVerification({
                     email: email.trim().toLowerCase(),
                     otp: otp.trim(),
                 });
@@ -151,7 +151,7 @@ const VerifyOtp = () => {
 
         setResending(true);
         try {
-            await loginUser(loginCredentials);
+            await login(loginCredentials);
             setSuccessMsg('A new code has been sent to your email.');
             setOtp('');
             setCountdown(RESEND_COOLDOWN_SEC);

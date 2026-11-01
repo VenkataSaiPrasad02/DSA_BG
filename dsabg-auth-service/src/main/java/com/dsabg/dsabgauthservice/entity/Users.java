@@ -1,5 +1,6 @@
 package com.dsabg.dsabgauthservice.entity;
 
+import com.dsabg.dsabgauthservice.entity.Enum.Roles;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +16,14 @@ import java.util.Date;
 public class Users {
     @Id
     private String id;
+    @Column(nullable = false, unique = true)
     private String username;
     private String password;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
     private String phone;
+    @Enumerated(EnumType.STRING)
+    private Roles role=Roles.USER;
     private String status;
     @CreationTimestamp
     private Date createdAt;

@@ -1,0 +1,17 @@
+﻿.oauth-loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #f5f7fb;
+}
+
+.oauth-loading-container h3 {
+  color: #333;
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0;
+}

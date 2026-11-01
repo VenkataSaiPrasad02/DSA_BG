@@ -1,0 +1,45 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Add UX enhancements and polish to authentication flows: loading states during API calls, password visibility toggle, improved error messaging, and resend OTP cooldown timer. These enhancements improve user experience and prevent common issues like double-submission and unclear feedback.",
+  "status": "pending",
+  "steps": [
+    "Read current src/pages/Login.jsx and src/pages/Register.jsx to understand existing error handling and form submission logic.",
+    "Add loading states to src/pages/Login.jsx: Add isLoading state (boolean). Set isLoading=true when submitting credentials or OTP. Set isLoading=false when response received (success or error). Disable submit buttons when loading. Change button text to 'Sending...' or 'Verifying...' during loading. Show loading indicator (spinner or text).",
+    "Add loading states to src/pages/Register.jsx: Same pattern as Login - isLoading state, disable buttons during submission, change button text to indicate loading.",
+    "Add password visibility toggle to src/pages/Login.jsx: Add showPassword state (boolean, default false). Change password input type to {showPassword ? 'text' : 'password'}. Add eye icon button next to password field. Toggle showPassword on button click.",
+    "Add password visibility toggle to src/pages/Register.jsx: Same implementation as Login page.",
+    "Update src/styles/Login.css: Add styles for loading states (disabled button styling, loading text/spinner), eye icon button (position absolute inside input field on right side, cursor pointer, hover effects).",
+    "Update src/styles/Register.css: Add same loading and password visibility styles as Login.css for consistency.",
+    "Improve error messaging in src/pages/Login.jsx: Parse backend error responses from err.response?.data?.message. Handle specific error cases: invalid credentials, invalid OTP, expired OTP, network errors. Display errors in prominent red alert box. Clear errors when user starts typing or submits form again.",
+    "Improve error messaging in src/pages/Register.jsx: Parse backend errors for: email already exists, validation failures, OTP errors, session expired. Display specific field validation errors if backend provides them. Clear errors appropriately.",
+    "Add resend OTP cooldown to src/pages/Login.jsx: Add resendCooldown state (number, seconds remaining, default 30). Start countdown after OTP is sent (use setInterval). Disable Resend OTP button while cooldown > 0. Update button text to show countdown: 'Resend OTP (23s)' or 'Resend OTP'. Clear interval on component unmount to prevent memory leaks. Reset cooldown to 30 when resend is clicked.",
+    "Add resend OTP cooldown to src/pages/Register.jsx: Same cooldown implementation as Login page.",
+    "Test all enhancements: (1) Submit login form -> button shows 'Sending...' and is disabled during API call. (2) Click password eye icon -> password becomes visible, click again -> hidden. (3) Enter invalid credentials -> specific error message displayed. (4) After OTP sent -> Resend button disabled for 30 seconds with countdown displayed. (5) After 30 seconds -> Resend button enabled. (6) Click Resend -> new OTP sent, cooldown resets. (7) Test same behaviors in registration flow."
+  ],
+  "acceptance_criteria": [
+    "Login and Register forms show loading states (disabled buttons, loading text) during API calls",
+    "Password fields have eye icon toggle to show/hide password text",
+    "Error messages are specific and helpful (invalid credentials, email exists, invalid OTP, etc.)",
+    "Errors are displayed in prominent red alert boxes",
+    "Errors clear when user starts typing in form fields or resubmits",
+    "Resend OTP button is disabled for 30 seconds after sending OTP",
+    "Resend OTP button shows countdown timer during cooldown period",
+    "Resend OTP button is re-enabled after 30 seconds",
+    "Clicking Resend OTP triggers new OTP and resets cooldown",
+    "No memory leaks from intervals (cleanup on unmount)",
+    "All enhancements work consistently in both Login and Register pages"
+  ],
+  "verification": [
+    "Start frontend: npm run dev",
+    "Test loading states: Submit login form -> verify button text changes to 'Sending...' and button is disabled. After response received -> button re-enabled.",
+    "Test password visibility: Click eye icon in password field -> password text becomes visible. Click again -> text hidden.",
+    "Test error messages: Enter wrong email/password -> verify specific error message like 'Invalid username/email or password'. Try to register with existing email -> verify error like 'User with email already exists'. Enter wrong OTP -> verify 'Invalid or expired OTP' message.",
+    "Test resend cooldown: Submit login credentials to get to OTP step -> verify Resend OTP button shows 'Resend OTP (30s)' and is disabled. Wait for countdown -> button text updates each second. After 30 seconds -> button shows 'Resend OTP' and is enabled. Click Resend OTP -> new OTP sent, countdown resets to 30 seconds.",
+    "Test same enhancements in Register flow: loading states, password toggle, error messages, resend cooldown all work.",
+    "Test cleanup: Navigate away from Login/Register pages during cooldown -> no console errors about memory leaks or intervals.",
+    "Check browser console for no errors or warnings during any UX interactions."
+  ],
+  "blocked_reason": null,
+  "findings": ""
+}

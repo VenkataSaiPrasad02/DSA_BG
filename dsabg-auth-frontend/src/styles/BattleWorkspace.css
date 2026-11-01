@@ -1,0 +1,491 @@
+.battle-workspace {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    gap: 18px;
+    padding: 22px clamp(16px, 3vw, 42px) 30px;
+    background:
+        radial-gradient(ellipse at 18% 0%, rgba(80, 52, 124, 0.18), transparent 38%),
+        #101014;
+    color: #f2f1f5;
+}
+
+.battle-workspace-state {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.battle-workspace-header,
+.battle-workspace-brand,
+.battle-workspace-session,
+.battle-editor-toolbar,
+.battle-editor-actions,
+.battle-output-heading,
+.battle-panel-heading {
+    display: flex;
+    align-items: center;
+}
+
+.battle-workspace-header {
+    min-height: 62px;
+    justify-content: space-between;
+    gap: 18px;
+}
+
+.battle-workspace-brand {
+    min-width: 0;
+    gap: 18px;
+}
+
+.battle-workspace-back,
+.battle-workspace-link {
+    color: #c4b1f5;
+    font-size: 12px;
+    font-weight: 650;
+    text-decoration: none;
+}
+
+.battle-workspace-back:hover,
+.battle-workspace-link:hover {
+    color: #fff;
+}
+
+.battle-workspace-eyebrow {
+    color: #bba2ff;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.6px;
+}
+
+.battle-workspace-header h1 {
+    overflow: hidden;
+    margin: 4px 0 0;
+    color: #f4f2f7;
+    font-size: clamp(20px, 3vw, 27px);
+    font-weight: 800;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.battle-workspace-session {
+    flex: 0 0 auto;
+    gap: 16px;
+    color: #a7a3af;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 10px;
+}
+
+.battle-exit-button {
+    min-height: 34px;
+    padding: 0 13px;
+    border: 1px solid #88464f;
+    border-radius: 7px;
+    background: #351d23;
+    color: #ffd5d8;
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+}
+
+.battle-exit-button:hover {
+    border-color: #c76c77;
+    background: #49232a;
+}
+
+.battle-exit-button:focus-visible,
+.battle-exit-dialog button:focus-visible {
+    outline: 2px solid #d5bdff;
+    outline-offset: 3px;
+}
+
+.battle-exit-error {
+    margin: -8px 0 0;
+    color: #ff9ca5;
+    font-size: 12px;
+}
+
+.battle-exit-dialog-backdrop {
+    position: fixed;
+    z-index: 20;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(5, 5, 8, 0.76);
+}
+
+.battle-exit-dialog {
+    width: min(100%, 400px);
+    padding: 22px;
+    border: 1px solid #423d4b;
+    border-radius: 12px;
+    background: #19181f;
+    box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
+}
+
+.battle-exit-dialog h2 {
+    margin: 0;
+    color: #f2eff7;
+    font-size: 18px;
+}
+
+.battle-exit-dialog p {
+    margin: 10px 0 20px;
+    color: #aaa6b2;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.battle-exit-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 9px;
+}
+
+.battle-exit-dialog button {
+    min-height: 35px;
+    padding: 0 13px;
+    border: 1px solid #403c49;
+    border-radius: 7px;
+    background: #211f27;
+    color: #dedbe5;
+    font: inherit;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.battle-exit-dialog button:disabled {
+    cursor: wait;
+    opacity: 0.65;
+}
+
+.battle-exit-dialog .battle-exit-confirm {
+    border-color: #88464f;
+    background: #592830;
+    color: #ffe4e6;
+}
+
+.battle-live-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: #c6f0d7;
+    font-family: inherit;
+    font-weight: 750;
+}
+
+.battle-live-indicator > span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #60d394;
+    box-shadow: 0 0 12px rgba(96, 211, 148, 0.7);
+}
+
+.battle-session-strip {
+    display: grid;
+    grid-template-columns: minmax(140px, 0.7fr) minmax(190px, 0.9fr) minmax(240px, 1.5fr);
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid #302d38;
+    border-radius: 12px;
+    background: #302d38;
+}
+
+.battle-session-stat {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    gap: 7px;
+    padding: 13px 16px;
+    background: #17161d;
+}
+
+.battle-session-stat > span {
+    color: #8f8b98;
+    font-size: 9px;
+    font-weight: 750;
+    letter-spacing: 1.2px;
+}
+
+.battle-session-stat > strong {
+    overflow: hidden;
+    color: #e8e5ee;
+    font-size: 12px;
+    font-weight: 650;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.battle-opponents > strong {
+    color: #d3c4f7;
+}
+
+.battle-workspace-grid {
+    display: grid;
+    min-height: 0;
+    flex: 1;
+    grid-template-columns: minmax(300px, 0.78fr) minmax(0, 1.22fr);
+    gap: 18px;
+}
+
+.battle-problem-panel,
+.battle-coding-panel {
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #302d38;
+    border-radius: 13px;
+    background: #15151b;
+}
+
+.battle-problem-panel {
+    padding: 20px;
+}
+
+.battle-panel-heading {
+    justify-content: space-between;
+    gap: 12px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #2c2933;
+}
+
+.battle-panel-heading h2 {
+    margin: 5px 0 0;
+    color: #f0edf5;
+    font-size: 17px;
+}
+
+.battle-data-badge,
+.battle-output-heading > span {
+    padding: 5px 7px;
+    border: 1px solid #51445d;
+    border-radius: 6px;
+    color: #c7b4e8;
+    font-size: 8px;
+    font-weight: 750;
+    letter-spacing: 0.8px;
+    white-space: nowrap;
+}
+
+.battle-problem-empty {
+    display: flex;
+    min-height: 210px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 12px;
+    text-align: center;
+}
+
+.battle-empty-icon {
+    display: grid;
+    width: 46px;
+    height: 46px;
+    place-items: center;
+    border: 1px solid #51436a;
+    border-radius: 13px;
+    background: #211c2c;
+    color: #c8b3fa;
+    font-family: ui-monospace, Consolas, monospace;
+    font-size: 15px;
+    font-weight: 750;
+}
+
+.battle-problem-empty h3 {
+    margin: 14px 0 7px;
+    color: #e9e5ef;
+    font-size: 14px;
+}
+
+.battle-problem-empty p,
+.battle-problem-section p,
+.battle-output-panel > p {
+    margin: 0;
+    color: #9793a0;
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+.battle-problem-empty p {
+    max-width: 360px;
+}
+
+.battle-problem-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.battle-problem-section {
+    min-width: 0;
+    padding: 12px;
+    border: 1px solid #2c2933;
+    border-radius: 8px;
+    background: #121217;
+}
+
+.battle-problem-section h3 {
+    margin: 0 0 7px;
+    color: #cfcbd7;
+    font-size: 10px;
+    font-weight: 700;
+}
+
+.battle-coding-panel {
+    display: flex;
+    min-height: 560px;
+    flex-direction: column;
+}
+
+.battle-editor-toolbar {
+    min-height: 48px;
+    gap: 10px;
+    padding: 8px 12px;
+    border-bottom: 1px solid #302d38;
+    background: #19181f;
+}
+
+.battle-editor-toolbar label {
+    color: #aaa6b2;
+    font-size: 10px;
+    font-weight: 650;
+}
+
+.battle-editor-toolbar select {
+    min-height: 30px;
+    padding: 0 25px 0 9px;
+    border: 1px solid #3b3744;
+    border-radius: 6px;
+    background: #111116;
+    color: #e7e3ed;
+    font-size: 10px;
+}
+
+.battle-draft-label {
+    overflow: hidden;
+    margin-left: auto;
+    color: #918c99;
+    font-size: 9px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.battle-editor-container {
+    min-height: 300px;
+    flex: 1;
+}
+
+.battle-editor-loading {
+    display: grid;
+    height: 100%;
+    min-height: 300px;
+    place-items: center;
+    color: #9c97a5;
+    font-size: 12px;
+}
+
+.battle-editor-actions {
+    min-height: 54px;
+    justify-content: flex-end;
+    gap: 9px;
+    padding: 9px 12px;
+    border-top: 1px solid #302d38;
+    background: #19181f;
+}
+
+.battle-editor-actions > span {
+    margin-right: auto;
+    color: #888491;
+    font-size: 9px;
+}
+
+.battle-editor-actions button {
+    min-height: 33px;
+    padding: 0 12px;
+    border: 1px solid #403c49;
+    border-radius: 7px;
+    background: #211f27;
+    color: #aaa6b1;
+    font-size: 10px;
+    font-weight: 700;
+    cursor: not-allowed;
+    opacity: 0.65;
+}
+
+.battle-editor-actions .battle-submit-button {
+    border-color: #644ca0;
+    background: #40305e;
+    color: #ded0ff;
+}
+
+.battle-output-panel {
+    padding: 14px;
+    border-top: 1px solid #302d38;
+    background: #121217;
+}
+
+.battle-output-heading {
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 9px;
+}
+
+.battle-output-heading h2 {
+    margin: 0;
+    color: #d9d5e0;
+    font-size: 11px;
+}
+
+.battle-workspace-state .rooms-error {
+    max-width: 520px;
+}
+
+@media (max-width: 900px) {
+    .battle-workspace-grid {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .battle-coding-panel {
+        min-height: 620px;
+    }
+}
+
+@media (max-width: 620px) {
+    .battle-workspace {
+        gap: 13px;
+        padding: 15px 12px 22px;
+    }
+
+    .battle-workspace-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .battle-workspace-session {
+        width: 100%;
+        justify-content: space-between;
+        gap: 9px;
+    }
+
+    .battle-session-strip {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .battle-opponents {
+        grid-column: 1 / -1;
+    }
+
+    .battle-problem-panel {
+        padding: 15px;
+    }
+
+    .battle-problem-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .battle-coding-panel {
+        min-height: 590px;
+    }
+}

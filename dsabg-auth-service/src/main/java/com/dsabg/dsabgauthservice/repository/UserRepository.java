@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<Users,Long> {
+public interface UserRepository extends JpaRepository<Users, String> {
     @Query(value = """
         SELECT MAX(CAST(SUBSTRING(id, 3) AS UNSIGNED))
         FROM users
@@ -15,4 +15,6 @@ public interface UserRepository extends JpaRepository<Users,Long> {
    boolean existsByEmail(String email);
    Optional<Users> findByEmail(String email);
    Optional<Users> findByUsername(String username);
+
+    boolean existsByUsername(String username);
 }

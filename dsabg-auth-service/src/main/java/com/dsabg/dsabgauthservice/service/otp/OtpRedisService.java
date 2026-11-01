@@ -1,6 +1,8 @@
 
 package com.dsabg.dsabgauthservice.service.otp;
 
+import com.dsabg.dsabgauthservice.dto.PendingRegistration;
+
 public interface OtpRedisService {
 
     void saveOtp(String email, String otp);
@@ -19,4 +21,10 @@ public interface OtpRedisService {
     String getLoginOtp(String email);
 
     void deleteLoginOtp(String email);
+
+    void savePendingRegistration(String email, PendingRegistration pending);
+
+    PendingRegistration getPendingRegistration(String email);
+
+    void deletePendingRegistration(String email);
 }

@@ -1,0 +1,30 @@
+{
+  "project_type": "React + Vite frontend with Spring Boot backend",
+  "language": "JavaScript (React JSX)",
+  "build_system": "Vite 8.3.4 with npm",
+  "test_framework": "None configured (manual testing required)",
+  "build_command": "npm run build",
+  "test_command": "npm run dev (manual testing in browser)",
+  "verification_instructions": "Start frontend dev server with 'npm run dev', ensure backend is running on port 8080, RabbitMQ on 5672, Redis on default port, and test authentication flows manually in browser. Check browser console for errors.",
+  "snapshot_or_generated_files": null,
+  "environment_constraints": "Backend must be running on localhost:8080. RabbitMQ must be running on localhost:5672 for OTP emails. Redis must be running for OTP storage. Email consumer service must be configured with SMTP credentials for actual email delivery. OAuth2 providers require environment variables (GOOGLE_CLIENT_ID, etc.) to be set in backend.",
+  "contribution_requirements": "All CSS must be in separate files in src/styles/ directory. No inline styles. Maintain existing code style and naming conventions. Use functional React components with hooks. All authentication state managed through AuthContext. JWT tokens stored in localStorage and auto-injected by axios interceptor.",
+  "key_patterns": "Authentication flow: axios interceptor adds Bearer token to all requests automatically. AuthContext provides login/logout/user state. ProtectedRoute wrapper checks authentication before rendering protected pages. OAuth2 flow redirects to /oauth2/redirect with token query param. Backend uses two-step OTP flow for both registration and login (credentials first, then OTP verification).",
+  "relevant_files": [
+    "src/api/axios.jsx",
+    "src/context/AuthContext.jsx",
+    "src/components/ProtectedRoute.jsx",
+    "src/pages/Login.jsx",
+    "src/pages/Register.jsx",
+    "src/pages/Dashboard.jsx",
+    "src/pages/OAuth2RedirectHandler.jsx",
+    "src/App.jsx",
+    "src/styles/Login.css",
+    "src/styles/Register.css",
+    "src/styles/Dashboard.css",
+    "src/styles/OAuth2RedirectHandler.css",
+    "package.json",
+    ".env"
+  ],
+  "directory_structure": "src/ contains: api/ (axios config), components/ (ProtectedRoute, future layout components), context/ (AuthContext), pages/ (Login, Register, Dashboard, OAuth2RedirectHandler), styles/ (CSS files matching component names). Root contains: package.json, .env, vite.config.js"
+}

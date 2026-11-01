@@ -1,0 +1,15 @@
+package com.dsabg.dsabg_profile_service.repository;
+
+import com.dsabg.dsabg_profile_service.entity.Profile;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.Optional;
+
+public interface ProfileRepository extends JpaRepository<Profile, Long> {
+
+    Optional<Profile> findByUserId(String userId);
+
+    boolean existsByUserId(String userId);
+
+
+}

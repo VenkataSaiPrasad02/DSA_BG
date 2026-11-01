@@ -126,7 +126,7 @@ All page components were already correctly implemented:
    - ✅ localStorage token persistence
 
 2. **src/api/axios.jsx**
-   - ✅ Correct backend base URL (http://localhost:8081)
+   - ✅ Correct backend base URL (http://localhost:8080)
    - ✅ JWT token auto-injection via request interceptor
    - ✅ 401 response interceptor with auto-redirect to login
    - ✅ Session expiration handling

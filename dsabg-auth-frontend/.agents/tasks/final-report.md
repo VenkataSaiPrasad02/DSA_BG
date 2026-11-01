@@ -25,8 +25,8 @@ The DSABG frontend integration with backend APIs is complete. All critical authe
 ## 1. Backend API Inventory
 
 ### Base Configuration
-- **Backend Base URL**: `http://localhost:8081`
-- **API Gateway**: Port 8080 (routes `/auth/**` to auth-service on 8081)
+- **Backend Base URL**: `http://localhost:8080`
+- **API Gateway**: Port 8080 (routes `/auth/**` to auth-service on 8080)
 - **Frontend**: Port 5173 (Vite dev server)
 
 ### Authentication Endpoints
@@ -516,7 +516,7 @@ The backend API naming conventions were reviewed and deemed acceptable:
 1. User navigates to `/login`
 2. User clicks "Continue with Google" button
 3. Frontend calls `loginWithGoogle()` from authService
-4. Browser redirects to `http://localhost:8081/oauth2/authorization/google`
+4. Browser redirects to `http://localhost:8080/oauth2/authorization/google`
 5. Spring Security redirects to Google OAuth2 consent screen
 
 **Step 2: Google Authentication**
@@ -764,15 +764,15 @@ FB_CLIENT_SECRET=your_facebook_secret
 **Setup Instructions**:
 1. Google: https://console.cloud.google.com/apis/credentials
    - Create OAuth2 Client ID
-   - Authorized redirect URI: `http://localhost:8081/login/oauth2/code/google`
+   - Authorized redirect URI: `http://localhost:8080/login/oauth2/code/google`
 
 2. GitHub: https://github.com/settings/developers
    - Register new OAuth App
-   - Authorization callback URL: `http://localhost:8081/login/oauth2/code/github`
+   - Authorization callback URL: `http://localhost:8080/login/oauth2/code/github`
 
 3. Facebook: https://developers.facebook.com/apps/
    - Create app with Facebook Login
-   - Valid OAuth Redirect URI: `http://localhost:8081/login/oauth2/code/facebook`
+   - Valid OAuth Redirect URI: `http://localhost:8080/login/oauth2/code/facebook`
 
 ---
 

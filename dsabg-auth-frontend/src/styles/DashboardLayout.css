@@ -1,0 +1,60 @@
+/*
+ * DashboardLayout
+ * ───────────────
+ * Fixed-height viewport layout with no footer:
+ *
+ *  ┌─────────────────────────────────────────┐  ← .header     (60px)
+ *  ├─────────────────────────────────────────┤  ← .navbar     (44px)
+ *  ├──────────┬──────────────────────────────┤
+ *  │  .aside  │         .main               │  ← fill remaining height
+ *  │ (220px)  │    (scrollable content)     │
+ *  └──────────┴──────────────────────────────┘
+ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.dashboard-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: #101014;
+  color: #f2f1f5;
+}
+
+/* Row that contains aside + main */
+.dashboard-body {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+.dashboard-main {
+  flex: 1;
+  min-width: 0;
+  padding: 30px;
+  background: #101014;
+}
+
+/* Scrollbar styling for the main content area */
+.dashboard-main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.dashboard-main::-webkit-scrollbar-thumb {
+  background-color: #484550;
+  border-radius: 3px;
+}
+
+@media (max-width: 700px) {
+  .dashboard-main {
+    padding: 20px 16px 28px;
+  }
+
+  .dashboard-body {
+    flex-direction: column;
+  }
+}

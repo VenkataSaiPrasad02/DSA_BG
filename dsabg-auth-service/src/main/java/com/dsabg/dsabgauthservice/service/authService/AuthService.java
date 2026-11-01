@@ -1,23 +1,23 @@
 package com.dsabg.dsabgauthservice.service.authService;
 
 import com.dsabg.dsabgauthservice.dto.request.LoginOtpRequest;
+import com.dsabg.dsabgauthservice.dto.request.LoginRequest;
 import com.dsabg.dsabgauthservice.dto.request.ResetPasswordRequest;
-import com.dsabg.dsabgauthservice.dto.request.UserLoginRequest;
-import com.dsabg.dsabgauthservice.dto.request.UserRegistrationRequest;
+import com.dsabg.dsabgauthservice.dto.request.SignUpOtpVerificationRequest;
+import com.dsabg.dsabgauthservice.dto.request.SignUpRequest;
 import jakarta.validation.Valid;
 
 public interface AuthService {
-    void SignUp(@Valid UserRegistrationRequest userRegistrationRequest);
 
-    void login(@Valid UserLoginRequest user);
-    void verifyRegistrationOtp(
-            UserRegistrationRequest user,
-            String otp
-    );
+    void signUp(@Valid SignUpRequest signUpRequest);
+
+    void signUpOtpVerification(String email, String otp);
+
+    void login(@Valid LoginRequest loginRequest);
+
+    String loginOtpVerification(LoginOtpRequest request);
+
     void forgotPassword(String email);
 
     void resetPassword(ResetPasswordRequest request);
-
-
-    String verifyLoginOtp(LoginOtpRequest request);
 }

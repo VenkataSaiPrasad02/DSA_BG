@@ -1,9 +1,20 @@
-
 server:
   port: ${SERVER_PORT:8081}
 
 app:
   message: "Auth Service configuration loaded"
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: 3600000
+  cookie:
+    # false for local HTTP dev; true for production (HTTPS required for Secure cookies)
+    secure: ${COOKIE_SECURE:false}
+    # Lax for local dev (same-host different-port = same-site in browsers).
+    # None for production when React and gateway are on different domains
+    # (SameSite=None requires Secure=true).
+    same-site: ${COOKIE_SAME_SITE:Lax}
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
 
 spring:
   datasource:
@@ -14,13 +25,12 @@ spring:
 
   jpa:
     hibernate:
+      # CURRENT: update.
+      # Switch to "validate" after running the Phase 1 SQL migration.
       ddl-auto: update
     show-sql: true
+
   data:
     redis:
       host: ${REDIS_HOST:localhost}
       port: ${REDIS_PORT:6379}
-
-  jwt:
-    secret: ${JWT_SECRET}
-    expiration-ms: 3600000

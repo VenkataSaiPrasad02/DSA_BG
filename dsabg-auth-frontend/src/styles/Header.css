@@ -1,0 +1,97 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  min-height: 68px;
+  background-color: #141419;
+  color: #fff;
+  flex-shrink: 0;
+  border-bottom: 1px solid #292830;
+  z-index: 100;
+}
+
+/* Brand / logo */
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-brand-icon {
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid #574476;
+  border-radius: 9px;
+  background: rgba(139, 92, 246, 0.14);
+  color: #c9b7ff;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.header-brand-name {
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  color: #f1eff5;
+}
+
+.header-brand-name span {
+  color: #a78bfa;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+}
+
+/* Right-side user area */
+.header-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.header-user-email {
+  font-size: 13px;
+  color: #aaa6b2;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.header-logout-btn {
+  padding: 7px 16px;
+  border: 1px solid #393741;
+  border-radius: 8px;
+  background: transparent;
+  color: #d6d3dc;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.header-logout-btn:hover {
+  background-color: rgba(139, 92, 246, 0.14);
+  border-color: #7259a2;
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 0 14px;
+  }
+
+  .header-user-email {
+    display: none;
+  }
+
+  .header-brand-name {
+    font-size: 13px;
+  }
+
+  .header-brand-name span {
+    display: none;
+  }
+}

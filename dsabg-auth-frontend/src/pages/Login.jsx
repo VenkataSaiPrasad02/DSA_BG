@@ -1,7 +1,7 @@
 ﻿import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { loginUser, loginWithGoogle } from '../services/authService';
+import { login, loginWithGoogle } from '../services/authService';
 import '../styles/Login.css';
 
 /**
@@ -47,7 +47,7 @@ const Login = () => {
 
         try {
             // Step 1: validates credentials and triggers an OTP email
-            await loginUser(formData);
+            await login(formData);
 
             // Determine the email to pre-fill on the OTP page.
             // If the user entered an email address use it directly;
@@ -118,6 +118,21 @@ const Login = () => {
                         >
                             {passwordVisible ? '🙈' : '👁'}
                         </button>
+                    </div>
+
+                    <div className="login-forgot-wrapper">
+                        <span
+                            onClick={() => navigate('/forgot-password')}
+                            className="login-forgot-link"
+                            role="button"
+                            tabIndex={0}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter' || e.key === ' ')
+                                    navigate('/forgot-password');
+                            }}
+                        >
+                            Forgot Password?
+                        </span>
                     </div>
 
                     <button

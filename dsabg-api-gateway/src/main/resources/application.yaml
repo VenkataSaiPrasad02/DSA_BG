@@ -1,10 +1,18 @@
-
 server:
   port: 8080
 
+app:
+  frontend:
+    url: ${FRONTEND_URL:http://localhost:5173}
+  jwt:
+    secret: ${JWT_SECRET}
+
 spring:
   application:
-    name: dsabg-api-gateway
+    name: gateway
+
+  config:
+    import: "optional:configserver:http://localhost:8888"
 
   cloud:
     gateway:
@@ -15,3 +23,32 @@ spring:
               uri: http://localhost:8081
               predicates:
                 - Path=/auth/**
+
+            - id: dsabg-profile-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/profile/**
+            - id: dsabg-friends-service
+              uri : http://localhost:8083
+              predicates:
+                - Path=/friend/**
+              filters:
+                # Keep Authorization so Profile can call Auth /users/{id} with the same JWT.
+                # Default sensitive headers would strip Authorization.
+                - SensitiveHeaders=Cookie,Set-Cookie
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    instance-id: ${spring.application.name}:${server.port}
+    prefer-ip-address: true
+
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    reactor.netty.http.client: DEBUG

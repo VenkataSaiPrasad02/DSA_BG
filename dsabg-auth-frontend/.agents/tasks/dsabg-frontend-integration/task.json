@@ -1,0 +1,7 @@
+{
+  "task_id": "dsabg-frontend-integration",
+  "task_description": "Complete DSABG Frontend Integration with Backend APIs, Email OTP Authentication, and Dashboard Layout",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}
