@@ -1,4 +1,4 @@
-
+  
 server:
   port: ${SERVER_PORT:8081}
 
@@ -40,7 +40,7 @@ spring:
     host: smtp.gmail.com
     port: 587
     username: ${MAIL_USERNAME}
-    password: ${MAIL_APP_PASSWORD}
+    password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
