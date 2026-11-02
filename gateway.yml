@@ -1,77 +1,49 @@
-
-server:
-  port: 8080
-
-app:
-  frontend:
-    url: ${FRONTEND_URL:http://localhost:5173}
-  jwt:
-    secret: ${JWT_SECRET}
-
 spring:
   application:
     name: gateway
-
-
   cloud:
     gateway:
       server:
         webflux:
           routes:
-        - id: auth-service
-          uri: http://localhost:8081
-          predicates:
-            - Path=/auth/**
+            - id: auth-service
+              uri: http://localhost:8081
+              predicates:
+                - Path=/auth/**
 
-        - id: dsabg-profile-service
-          uri: http://localhost:8082
-          predicates:
-            - Path=/profile/**
+            - id: dsabg-profile-service
+              uri: http://localhost:8082
+              predicates:
+                - Path=/profile/**
 
-        - id: dsabg-friends-service
-          uri: http://localhost:8083
-          predicates:
-            - Path=/friend/**
-          filters:
-            - SensitiveHeaders=Cookie,Set-Cookie
+            - id: dsabg-friends-service
+              uri: http://localhost:8083
+              predicates:
+                - Path=/friend/**
+              filters:
+                - SensitiveHeaders=Cookie,Set-Cookie
 
-        - id: dsabg-custom-room-service
-          uri: http://localhost:8084
-          predicates:
-            - Path=/room/**
+            - id: dsabg-custom-room-service
+              uri: http://localhost:8084
+              predicates:
+                - Path=/room/**
 
-        - id: dsabg-problem-service
-          uri: http://localhost:8085
-          predicates:
-            - Path=/problem/**
+            - id: dsabg-problem-service
+              uri: http://localhost:8085
+              predicates:
+                - Path=/problem/**
 
-        - id: dsabg-battle-service
-          uri: http://localhost:8086
-          predicates:
-            - Path=/battle/**
+            - id: dsabg-battle-service
+              uri: http://localhost:8086
+              predicates:
+                - Path=/battle/**
 
-        - id: dsabg-custom-room-websocket
-          uri: ws://localhost:8084
-          predicates:
-            - Path=/ws,/ws/**
+            - id: dsabg-custom-room-websocket
+              uri: ws://localhost:8084
+              predicates:
+                - Path=/ws,/ws/**
 
-        - id: dsabg-judge-service
-          uri: http://localhost:8087
-          predicates:
-            - Path=/judge/**
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-    register-with-eureka: true
-    fetch-registry: true
-
-  instance:
-    instance-id: ${spring.application.name}:${server.port}
-    prefer-ip-address: true
-
-logging:
-  level:
-    org.springframework.cloud.gateway: TRACE
-    reactor.netty.http.client: DEBUG
+            - id: dsabg-judge-service
+              uri: http://localhost:8087
+              predicates:
+                - Path=/judge/**
