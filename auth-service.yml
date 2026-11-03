@@ -6,7 +6,7 @@ app:
   message: "Auth Service configuration loaded"
   jwt:
     secret: ${JWT_SECRET}
-    expiration-ms: 3600000
+    expiration-ms: 604,800,000
   cookie:
     # false for local HTTP dev; true for production (HTTPS required for Secure cookies)
     secure: ${COOKIE_SECURE:false}
