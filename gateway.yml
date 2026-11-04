@@ -51,3 +51,8 @@ spring:
               uri: lb:ws://dsabg-battle-service
               predicates:
                 - Path=/battle-ws/**
+
+            - id: dsabg-matchmaking-service
+              uri: http://localhost:8089
+              predicates:
+                - Path=/matchmaking/**
