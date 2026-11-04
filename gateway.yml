@@ -46,3 +46,8 @@ spring:
               uri: http://localhost:8087
               predicates:
                 - Path=/judge/**
+
+            - id: dsabg-battle-ws
+              uri: lb:ws://dsabg-battle-service
+              predicates:
+                - Path=/battle-ws/**
